@@ -1,10 +1,10 @@
-package net.gentledot.study;
+package net.gentledot.search;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StudyApplicationTests {
+class SearchApplicationTests {
 
     @Test
     void contextLoads() {
