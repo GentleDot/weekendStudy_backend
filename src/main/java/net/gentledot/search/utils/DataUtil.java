@@ -1,8 +1,5 @@
-package net.gentledot.study.utils;
+package net.gentledot.search.utils;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class DataUtil {
 
     String[] chs = {

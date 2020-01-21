@@ -1,13 +1,13 @@
-package net.gentledot.study;
+package net.gentledot.search;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudyApplication {
+public class SearchApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StudyApplication.class, args);
+        SpringApplication.run(SearchApplication.class, args);
     }
 
 }
