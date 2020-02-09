@@ -1,6 +1,7 @@
 package net.gentledot.search.controllers;
 
 import net.gentledot.search.models.TestModel;
+import net.gentledot.search.models.api.request.Keywords;
 import net.gentledot.search.service.TestService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class TestController {
     }
 
     @PostMapping
-    public TestModel registry(@RequestBody TestModel testModel){
-        return testService.register(testModel);
+    public TestModel registry(@RequestBody Keywords keywords){
+        return testService.register(keywords);
     }
 }

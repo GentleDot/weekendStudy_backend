@@ -1,29 +1,31 @@
 package net.gentledot.search.models;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.regex.Pattern.matches;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 public class Langs {
-    private String KR;
-    private String EN;
+    private final String kr;
+    private final String en;
 
-    protected Langs() {}
+    public Langs(String kr, String en) {
+        checkNotNull(kr, "한국어 검색어는 null이 될 수 없습니다.");
+        checkNotNull(en, "영어 검색어는 null이 될 수 없습니다.");
+        checkArgument(isNotEmpty(kr), "한국어 검색어는 빈 값이 될 수 없습니다.");
+        checkArgument(isNotEmpty(en), "영어 검색어는 빈 값이 될 수 없습니다.");
+        checkArgument(matches("[가-힣._-]+", kr), "한국어 검색어는 한글만 입력 가능합니다.");
+        checkArgument(matches("[a-zA-Z._-]+", en), "한국어 검색어는 한글만 입력 가능합니다.");
 
-    public Langs(String KR, String EN) {
-        this.KR = KR;
-        this.EN = EN;
+        this.kr = kr;
+        this.en = en;
     }
 
-    public String getKR() {
-        return KR;
+    public String getKr() {
+        return kr;
     }
 
-    public String getEN() {
-        return EN;
-    }
-
-    public void setKR(String KR) {
-        this.KR = KR;
-    }
-
-    public void setEN(String EN) {
-        this.EN = EN;
+    public String getEn() {
+        return en;
     }
 }

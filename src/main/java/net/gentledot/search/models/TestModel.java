@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 
 @Entity(name = "Test")
 @Getter
-@Table(name ="test")
+@Table(name = "test")
 @EqualsAndHashCode
 @TypeDef(name = "json",
         typeClass = JsonStringType.class
 )
-public class TestModel {
+public class TestModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long testNo;
@@ -37,8 +37,8 @@ public class TestModel {
     public TestModel() {
     }
 
-    public TestModel(Long testNo) {
-        this.testNo = testNo;
+    public TestModel(Langs rawData, String keyword) {
+        this(null, rawData, keyword, null, null);
     }
 
     public TestModel(Long testNo, Langs rawData, String keyword, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -63,7 +63,6 @@ public class TestModel {
     public static TestModelBuilder builder(TestModel testModel) {
         return new TestModelBuilder(testModel);
     }
-
 
     public static final class TestModelBuilder {
         private Long testNo;

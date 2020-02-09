@@ -26,8 +26,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.vladmihalcea:hibernate-types-52:2.8.0'
-    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.apache.commons:commons-lang3:3.9'
+    compileOnly 'com.google.guava:guava:28.2-jre'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
