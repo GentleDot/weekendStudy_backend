@@ -1,15 +1,17 @@
 package net.gentledot.search.models;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Entity(name = "Test")
 @Getter
@@ -24,24 +26,24 @@ public class TestModel{
     private Long testNo;
 
     @Type(type = "json")
-    private Langs rawData;
+    private Map<String, String> rawData;
 
     private String keyword;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @CreationTimestamp
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public TestModel() {
+    protected TestModel() {
     }
 
-    public TestModel(Langs rawData, String keyword) {
+    public TestModel(Map<String, String> rawData, String keyword) {
         this(null, rawData, keyword, null, null);
     }
 
-    public TestModel(Long testNo, Langs rawData, String keyword, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TestModel(Long testNo, Map<String, String> rawData, String keyword, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.testNo = testNo;
         this.rawData = rawData;
         this.keyword = keyword;
@@ -53,25 +55,24 @@ public class TestModel{
     public String toString() {
         return "TestModel{" +
                 "testNo=" + testNo +
-                ", rawData='" + rawData + '\'' +
+                ", rawData=" + rawData +
                 ", keyword='" + keyword + '\'' +
                 ", createdAt=" + createdAt +
-                ", updateAt=" + updatedAt +
+                ", updatedAt=" + updatedAt +
                 '}';
-    }
-
-    public static TestModelBuilder builder(TestModel testModel) {
-        return new TestModelBuilder(testModel);
     }
 
     public static final class TestModelBuilder {
         private Long testNo;
-        private Langs rawData;
+        private Map<String, String> rawData;
         private String keyword;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
-        private TestModelBuilder(TestModel model) {
+        public TestModelBuilder() {
+        }
+
+        public TestModelBuilder(TestModel model) {
             this.testNo = model.getTestNo();
             this.rawData = model.getRawData();
             this.keyword = model.getKeyword();
@@ -84,7 +85,7 @@ public class TestModel{
             return this;
         }
 
-        public TestModelBuilder rawData(Langs rawData) {
+        public TestModelBuilder rawData(Map<String, String> rawData) {
             this.rawData = rawData;
             return this;
         }

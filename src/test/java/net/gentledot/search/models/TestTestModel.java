@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -17,19 +19,16 @@ class TestTestModel {
     @Test
     @DisplayName("Test 객체 생성 test")
     void createTestModelTest(){
-        TestModel test = new TestModel(1L);
-        TestModel anotherTest = TestModel.builder(new TestModel(2L))
-                .rawData(new Langs("안녕하세요.", "Hello!"))
-                .keyword("testKeyword")
+        TestModel test = new TestModel.TestModelBuilder()
+                .testNo(1L)
+                .rawData(Map.of("kr", "안녕하세요."))
+                .keyword("ㅇㄴㅎㅅㅇ")
                 .updateAt(LocalDateTime.now())
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        logger.info("생성된 test : {}", test.toString());
-        logger.info("생성된 anotherTest : {}", anotherTest.toString());
-
         assertThat(test, is(notNullValue()));
-        assertThat(anotherTest, is(notNullValue()));
+        logger.info("생성된 test : {}", test.toString());
     }
 
 }

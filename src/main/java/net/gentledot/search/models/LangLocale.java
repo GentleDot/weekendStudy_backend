@@ -1,21 +1,15 @@
 package net.gentledot.search.models;
 
 public enum LangLocale {
-    KO("kr", "한국어"), US("en", "english");
+    kr("kr"), en("en");
 
     private String locale;
-    private String value;
 
-    LangLocale(String locale, String value) {
+    LangLocale(String locale) {
         this.locale = locale;
-        this.value = value;
     }
 
-    public String getLocale() {
+    public String locale() {
         return locale;
-    }
-
-    public String getValue() {
-        return value;
     }
 }

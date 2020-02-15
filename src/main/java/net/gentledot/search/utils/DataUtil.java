@@ -2,7 +2,7 @@ package net.gentledot.search.utils;
 
 public class DataUtil {
 
-    String[] chs = {
+    private static String[] chs = {
             "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ",
             "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ",
             "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ",
@@ -12,7 +12,7 @@ public class DataUtil {
     // 초성을 찾아 unicode 형식으로 변환
     // 특수문자 제외
     // sql injection ex) '< >
-    public String chosung(String text) {
+    public static String chosung(String text) {
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < text.length(); i++) {
             int code = text.codePointAt(i) - 44032;
@@ -34,7 +34,7 @@ public class DataUtil {
 
     // 검색어 설정
     // 특수문자 제외
-    public String keyword(String text) {
+    public static String keyword(String text) {
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < text.length(); i++) {
             int code = text.codePointAt(i) - 44032;

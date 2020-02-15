@@ -1,10 +1,8 @@
 package net.gentledot.search.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.gentledot.search.models.Langs;
+import net.gentledot.search.models.LangLocale;
 import net.gentledot.search.models.TestModel;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +15,13 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Constraint;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 import java.nio.charset.StandardCharsets;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -54,10 +48,16 @@ class TestControllerTest {
     @Test
     @Transactional
     void registryTest() throws Exception {
-        String kr = "안녕, 자바!";
-        String en = "Hello, Java!";
-        Langs langs = new Langs(kr, en);
-        TestModel test = new TestModel(null, langs, "인삿말", null, null);
+        String kr = "안녕";
+        String en = "Hello";
+        Map<LangLocale, String> request = new HashMap<>();
+        request.put(LangLocale.kr, kr);
+        request.put(LangLocale.en, en);
+
+        Map<String, String> langsMap = request.entrySet().stream()
+                .collect(Collectors.toMap(rawData -> rawData.getKey().locale(), Map.Entry::getValue));
+
+        TestModel test = new TestModel(null, langsMap, "인삿말", null, null);
         ObjectMapper objectMapper = new ObjectMapper();
 
         ResultActions actions = mockMvc.perform(post("/tests")
